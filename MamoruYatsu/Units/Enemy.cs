@@ -11,8 +11,8 @@ namespace MamoruYatsu.Units
     abstract class Enemy : Unit
     {
         public Enemy(Field field, FrameworkElement ui)
+            : base(ui)
         {
-            this.UI = ui;
             this.field = field;
 
             this.right = -ui.ActualWidth;
@@ -33,7 +33,7 @@ namespace MamoruYatsu.Units
 
         public void Start()
         {
-            var upSpeed = App.Random.Next(40000, 70000) / 10000.0;
+            var upSpeed = App.Random.Next(25000, 60000) / 10000.0;
             this.timer = new DispatcherTimer(DispatcherPriority.Render, App.Current.Dispatcher);
             this.timer.Interval = TimeSpan.FromTicks(10000000 / 60); // 60 loop per sec
             this.timer.Tick += (_, __) =>
@@ -49,6 +49,7 @@ namespace MamoruYatsu.Units
                 var myRect = new Rect(myPoint.X, myPoint.Y, this.UI.ActualWidth, this.UI.ActualHeight);
                 var match = this.field.Walls.Cast<WithHitPoints>()
                     .Concat(new WithHitPoints[] { this.field.Castle })
+                    .Where(x => x != null)
                     .FirstOrDefault(x =>
                     {
                         var point = x.GetPoint();
@@ -77,6 +78,13 @@ namespace MamoruYatsu.Units
                 }
             };
             this.timer.Start();
+        }
+
+        public void Stop()
+        {
+            this.timer.Stop();
+            if (this.Disappeared != null)
+                this.Disappeared(this, EventArgs.Empty);
         }
     }
 }

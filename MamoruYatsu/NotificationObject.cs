@@ -1,6 +1,11 @@
-﻿using System;
-using System.ComponentModel;
-using System.Linq.Expressions;
+﻿using System.ComponentModel;
+using System.Runtime.CompilerServices;
+
+namespace System.Runtime.CompilerServices
+{
+    [AttributeUsage(AttributeTargets.Parameter, Inherited = false)]
+    public sealed class CallerMemberNameAttribute : Attribute { }
+}
 
 namespace MamoruYatsu
 {
@@ -8,10 +13,10 @@ namespace MamoruYatsu
     {
         public event PropertyChangedEventHandler PropertyChanged;
 
-        public void RaisePropertyChanged<T>(Expression<Func<T>> prop)
+        public void RaisePropertyChanged([CallerMemberName]string propertyName = "")
         {
             if (this.PropertyChanged != null)
-                this.PropertyChanged(this, new PropertyChangedEventArgs((prop.Body as MemberExpression).Member.Name));
+                this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
         }
     }
 }

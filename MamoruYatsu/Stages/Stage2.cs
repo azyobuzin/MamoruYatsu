@@ -7,16 +7,24 @@ namespace MamoruYatsu.Stages
 {
     class Stage2 : IStage
     {
+        public int Number
+        {
+            get
+            {
+                return 2;
+            }
+        }
+
         public bool NewEnemy()
         {
-            return App.Random.Next(3) == 0;
+            return App.Random.Next(2) == 0;
         }
 
         public int Reward
         {
             get
             {
-                return 200;
+                return 600;
             }
         }
     }

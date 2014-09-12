@@ -2,21 +2,18 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Windows;
-using System.Windows.Shapes;
-using System.Windows.Media;
 
 namespace MamoruYatsu.Units
 {
-    class WoodWall : Wall
+    class StoneWall : Wall
     {
-        public WoodWall(Field field) : base(field, new UnitViews.WoodWall()) { }
+        public StoneWall(Field field) : base(field, new UnitViews.StoneWall()) { }
 
         public override int Maximum
         {
             get
             {
-                return 30;
+                return 60;
             }
         }
     }

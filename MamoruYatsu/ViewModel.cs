@@ -11,6 +11,26 @@ namespace MamoruYatsu
         public ViewModel()
         {
             this.Field = new Field();
+            this.Field.StartedGame += (_, __) =>
+            {
+                this.IsPlaying = true;
+                this.IsSelectingParts = false;
+                this.IsSelectingStage = false;
+            };
+            this.Field.EndedGame += (_, __) =>
+            {
+                this.IsSelectingParts = true;
+                this.IsPlaying = false;
+            };
+            this.Field.PropertyChanged += (_, e) =>
+            {
+                switch (e.PropertyName)
+                {
+                    case "Cleared":
+                        this.SelectStageCommand.RaiseCanExecuteChanged();
+                        break;
+                }
+            };
         }
 
         public Field Field { get; private set; }
@@ -59,7 +79,7 @@ namespace MamoruYatsu
                 if (this.isSelectingStage != value)
                 {
                     this.isSelectingStage = value;
-                    this.RaisePropertyChanged(() => this.IsSelectingStage);
+                    this.RaisePropertyChanged();
                 }
             }
         }
@@ -76,7 +96,7 @@ namespace MamoruYatsu
                 if (this.isSelectingParts != value)
                 {
                     this.isSelectingParts = value;
-                    this.RaisePropertyChanged(() => this.IsSelectingParts);
+                    this.RaisePropertyChanged();
                 }
             }
         }
@@ -108,6 +128,23 @@ namespace MamoruYatsu
                         this.IsSelectingStage = false;
                     });
                 return this.goToSelectPartsCommand;
+            }
+        }
+
+        private bool isPlaying;
+        public bool IsPlaying
+        {
+            get
+            {
+                return this.isPlaying;
+            }
+            private set
+            {
+                if (this.isPlaying != value)
+                {
+                    this.isPlaying = value;
+                    this.RaisePropertyChanged();
+                }
             }
         }
     }

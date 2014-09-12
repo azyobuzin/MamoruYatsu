@@ -23,6 +23,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -33,7 +34,13 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationManifest>app.manifest</ApplicationManifest>
+  </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Microsoft.WindowsAPICodePack">
+      <HintPath>..\packages\Microsoft.WindowsAPICodePack-Core.1.1.0.2\lib\Microsoft.WindowsAPICodePack.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
@@ -63,7 +70,9 @@
     <Compile Include="Stages\Stage3.cs" />
     <Compile Include="Units\Bomb.cs" />
     <Compile Include="Units\Castle.cs" />
+    <Compile Include="Units\DiamondWall.cs" />
     <Compile Include="Units\Enemy.cs" />
+    <Compile Include="Units\StoneWall.cs" />
     <Compile Include="Units\Wall.cs" />
     <Compile Include="Units\WithHitPoints.cs" />
     <Compile Include="Units\WoodWall.cs" />
@@ -73,8 +82,14 @@
     <Compile Include="UnitViews\Castle.xaml.cs">
       <DependentUpon>Castle.xaml</DependentUpon>
     </Compile>
+    <Compile Include="UnitViews\DiamondWall.xaml.cs">
+      <DependentUpon>DiamondWall.xaml</DependentUpon>
+    </Compile>
     <Compile Include="UnitViews\Explosion.xaml.cs">
       <DependentUpon>Explosion.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UnitViews\StoneWall.xaml.cs">
+      <DependentUpon>StoneWall.xaml</DependentUpon>
     </Compile>
     <Compile Include="UnitViews\WoodWall.xaml.cs">
       <DependentUpon>WoodWall.xaml</DependentUpon>
@@ -116,9 +131,17 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="UnitViews\DiamondWall.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="UnitViews\Explosion.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UnitViews\StoneWall.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="UnitViews\WoodWall.xaml">
       <SubType>Designer</SubType>
@@ -146,6 +169,8 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <None Include="app.manifest" />
+    <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>

@@ -5,17 +5,18 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
         mc:Ignorable="d" 
         Width="800" Height="400" Loaded="Canvas_Loaded">
-    <!--<Rectangle Width="200" Height="250" Canvas.Left="0" Canvas.Bottom="0" Fill="Red" />
-    
-    <Rectangle Width="20" Height="100" Canvas.Left="250" Canvas.Bottom="0" Fill="Brown" />
-    <Rectangle Width="20" Height="100" Canvas.Left="250" Canvas.Bottom="100" Fill="Brown" />
-    <Rectangle Width="20" Height="100" Canvas.Left="250" Canvas.Bottom="200" Fill="Brown" />
-    
-    <Rectangle Width="20" Height="100" Canvas.Left="320" Canvas.Bottom="0" Fill="Brown" Canvas.Top="300" />
-    <Rectangle Width="20" Height="100" Canvas.Left="320" Canvas.Bottom="100" Fill="Brown" Canvas.Top="200" />
-    <Rectangle Width="20" Height="100" Canvas.Left="320" Canvas.Bottom="200" Fill="Brown" Canvas.Top="100" />
-
-    <Rectangle Width="20" Height="100" Canvas.Left="390" Canvas.Bottom="0" Fill="Brown" Canvas.Top="300" />
-    <Rectangle Width="20" Height="100" Canvas.Left="390" Canvas.Bottom="100" Fill="Brown" Canvas.Top="200" />
-    <Rectangle Width="20" Height="100" Canvas.Left="390" Canvas.Bottom="200" Fill="Brown" Canvas.Top="100" />-->
+    <StackPanel Orientation="Horizontal" Canvas.Top="10" Canvas.Right="10">
+        <TextBlock Text="お金: " />
+        <TextBlock Text="{Binding Field.Money}" />
+        
+        <StackPanel.Style>
+            <Style TargetType="StackPanel">
+                <Style.Triggers>
+                    <DataTrigger Binding="{Binding IsPlaying}" Value="True">
+                        <Setter Property="Visibility" Value="Collapsed" />
+                    </DataTrigger>
+                </Style.Triggers>
+            </Style>
+        </StackPanel.Style>
+    </StackPanel>
 </Canvas>
