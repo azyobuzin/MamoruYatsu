@@ -7,6 +7,7 @@ using System.Collections.ObjectModel;
 using MamoruYatsu.Units;
 using System.Windows.Controls;
 using System.Windows.Threading;
+using MamoruYatsu.Stages;
 
 namespace MamoruYatsu
 {
@@ -19,11 +20,8 @@ namespace MamoruYatsu
                 this.SetWall(new WoodWall(), i);
 
             this.Castle = new Castle();
-
-            DispatcherAsync.Delay(TimeSpan.FromSeconds(2),
-                () => CreatedEnemy(this, GenericEventArgs.Create<Enemy>(new Bomb(this))));
         }
-        
+
         public Wall[] Walls { get; private set; }
         public event EventHandler<EventArgs<int>> WallsChanging;
         public event EventHandler<EventArgs<int>> WallsChanged;
@@ -66,5 +64,39 @@ namespace MamoruYatsu
         public Castle Castle { get; set; }
 
         public event EventHandler<EventArgs<Enemy>> CreatedEnemy;
+
+        public event EventHandler StartedGame;
+        public event EventHandler EndedGame;
+
+        public void StartGame(IStage stage)
+        {
+            if (this.StartedGame != null)
+                this.StartedGame(this, EventArgs.Empty);
+
+            const double interval = 0.2;
+            const double totalCount = 20 / interval;
+            var count = 0;
+            var timer = new DispatcherTimer(DispatcherPriority.Normal, App.Current.Dispatcher);
+            timer.Interval = TimeSpan.FromSeconds(interval);
+            timer.Tick += (_, __) =>
+            {
+                if (count++ >= totalCount)
+                {
+                    timer.Stop();
+                    if (this.EndedGame != null)
+                        this.EndedGame(this, EventArgs.Empty);
+                    return;
+                }
+
+                if (count < totalCount * 0.8 && stage.NewEnemy())
+                {
+                    if (this.CreatedEnemy != null)
+                        this.CreatedEnemy(this, GenericEventArgs.Create<Enemy>(new Bomb(this)));
+                }
+            };
+            timer.Start();
+        }
+
+        public int Cleared { get; private set; }
     }
 }

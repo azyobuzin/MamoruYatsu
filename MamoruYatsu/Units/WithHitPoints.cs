@@ -14,6 +14,10 @@ namespace MamoruYatsu.Units
         public void MakeDamage(int power)
         {
             this.HitPoints -= power;
+            if (this.HitPoints <= 0)
+                this.HpZero();
         }
+
+        protected abstract void HpZero();
     }
 }

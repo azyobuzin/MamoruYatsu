@@ -7,12 +7,39 @@
     <Window.DataContext>
         <my:ViewModel />
     </Window.DataContext>
+    
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition />
-            <RowDefinition Height="120" />
+            <RowDefinition Height="100" />
         </Grid.RowDefinitions>
         
         <my:GameCanvas Grid.Row="0" />
+        
+        <Grid Grid.Row="1">
+            <my:PartsSelector>
+                <my:PartsSelector.Style>
+                    <Style TargetType="my:PartsSelector">
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding IsSelectingParts}" Value="False">
+                                <Setter Property="Visibility" Value="Collapsed" />
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </my:PartsSelector.Style>
+            </my:PartsSelector>
+
+            <my:StageSelector>
+                <my:StageSelector.Style>
+                    <Style TargetType="my:StageSelector">
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding IsSelectingStage}" Value="False">
+                                <Setter Property="Visibility" Value="Collapsed" />
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </my:StageSelector.Style>
+            </my:StageSelector>
+        </Grid>
     </Grid>
 </Window>

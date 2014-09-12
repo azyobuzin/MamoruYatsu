@@ -49,9 +49,18 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="DelegateCommand.cs" />
     <Compile Include="DispatcherAsync.cs" />
     <Compile Include="Field.cs" />
     <Compile Include="EventArgs.cs" />
+    <Compile Include="NotificationObject.cs" />
+    <Compile Include="StageSelector.xaml.cs">
+      <DependentUpon>StageSelector.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Stages\IStage.cs" />
+    <Compile Include="Stages\Stage1.cs" />
+    <Compile Include="Stages\Stage2.cs" />
+    <Compile Include="Stages\Stage3.cs" />
     <Compile Include="Units\Bomb.cs" />
     <Compile Include="Units\Castle.cs" />
     <Compile Include="Units\Enemy.cs" />
@@ -92,6 +101,10 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="PartsSelector.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="StageSelector.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

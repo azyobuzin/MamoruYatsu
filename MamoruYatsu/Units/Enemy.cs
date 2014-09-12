@@ -33,7 +33,7 @@ namespace MamoruYatsu.Units
 
         public void Start()
         {
-            var upSpeed = App.Random.Next(55000, 70000) / 10000.0;
+            var upSpeed = App.Random.Next(40000, 70000) / 10000.0;
             this.timer = new DispatcherTimer(DispatcherPriority.Render, App.Current.Dispatcher);
             this.timer.Interval = TimeSpan.FromTicks(10000000 / 60); // 60 loop per sec
             this.timer.Tick += (_, __) =>
