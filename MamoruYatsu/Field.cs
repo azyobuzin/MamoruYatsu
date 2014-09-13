@@ -15,13 +15,15 @@ namespace MamoruYatsu
     {
         public Field()
         {
+            this.Walls = new Wall[9];
             this.Castle = new Castle();
             this.Initialize();
         }
 
         private void Initialize()
         {
-            this.Walls = new Wall[9];
+            for (var i = 0; i < 9; i++)
+                this.SetWall(null, i);
             this.Cleared = 0;
             this.Money = 200;
             this.Castle.Reset();
@@ -105,7 +107,7 @@ namespace MamoruYatsu
             if (this.StartedGame != null)
                 this.StartedGame(this, EventArgs.Empty);
 
-            const double interval = 0.2;
+            const double interval = 0.1;
             const double totalCount = 20 / interval;
             var timer = new DispatcherTimer(DispatcherPriority.Normal, App.Current.Dispatcher);
             timer.Interval = TimeSpan.FromSeconds(interval);

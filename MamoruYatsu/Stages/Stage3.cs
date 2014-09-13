@@ -17,7 +17,7 @@ namespace MamoruYatsu.Stages
 
         public bool NewEnemy()
         {
-            return App.Random.Next(1) == 0;
+            return App.Random.Next(2) == 0;
         }
 
         public int Reward

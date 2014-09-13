@@ -41,7 +41,7 @@
                 </my:StageSelector.Style>
             </my:StageSelector>
             
-            <ProgressBar Margin="45" Maximum="100" Value="{Binding Field.CurrentCount, Mode=OneWay}">
+            <ProgressBar Margin="45" Maximum="200" Value="{Binding Field.CurrentCount, Mode=OneWay}">
                 <ProgressBar.Style>
                     <Style TargetType="ProgressBar">
                         <Style.Triggers>

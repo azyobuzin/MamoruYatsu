@@ -6,7 +6,7 @@
         mc:Ignorable="d" 
         Width="800" Height="400" Loaded="Canvas_Loaded">
     <StackPanel Orientation="Horizontal" Canvas.Top="10" Canvas.Right="10">
-        <TextBlock Text="お金: " />
+        <TextBlock Text="お金: \" />
         <TextBlock Text="{Binding Field.Money}" />
         
         <StackPanel.Style>
