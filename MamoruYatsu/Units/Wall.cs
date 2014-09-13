@@ -35,5 +35,10 @@ namespace MamoruYatsu.Units
                 this.field.SetWall(null, x + 2);
             });
         }
+
+        public void Cure()
+        {
+            this.HitPoints = this.Maximum;
+        }
     }
 }

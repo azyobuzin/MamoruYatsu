@@ -27,7 +27,7 @@ namespace MamoruYatsu
         }
 
         private ViewModel vm;
-        
+
         private void UserControl_Loaded(object sender, RoutedEventArgs e)
         {
             this.vm = this.DataContext as ViewModel;
@@ -143,6 +143,8 @@ namespace MamoruYatsu
             if (!this.CheckMoney(price)) return;
             this.vm.Field.Money -= price;
             this.vm.Field.Castle.Cure();
+            foreach (var w in this.vm.Field.Walls.Where(x => x != null))
+                w.Cure();
         }
 
     }
