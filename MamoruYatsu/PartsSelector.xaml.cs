@@ -11,6 +11,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Windows.Interop;
 using MamoruYatsu.Units;
 using Microsoft.WindowsAPICodePack.Dialogs;
 
@@ -58,6 +59,7 @@ namespace MamoruYatsu
             dialog.InstructionText = wallName;
             dialog.Text = "設置場所を選択してください。";
             dialog.Cancelable = true;
+            dialog.OwnerWindowHandle = new WindowInteropHelper(Window.GetWindow(this)).Handle;
 
             if (this.vm.Field.Walls[2] == null)
             {
@@ -73,7 +75,7 @@ namespace MamoruYatsu
                             break;
                         }
                     }
-                    dialog.Close();
+                    dialog.Close(TaskDialogResult.Ok);
                 };
                 dialog.Controls.Add(left);
             }
@@ -92,7 +94,7 @@ namespace MamoruYatsu
                             break;
                         }
                     }
-                    dialog.Close();
+                    dialog.Close(TaskDialogResult.Ok);
                 };
                 dialog.Controls.Add(center);
             }
@@ -111,15 +113,13 @@ namespace MamoruYatsu
                             break;
                         }
                     }
-                    dialog.Close();
+                    dialog.Close(TaskDialogResult.Ok);
                 };
                 dialog.Controls.Add(right);
             }
 
-            this.IsEnabled = false;
-            dialog.Show();
-            this.vm.Field.Money -= price;
-            this.IsEnabled = true;
+            if (dialog.Show() == TaskDialogResult.Ok)
+                this.vm.Field.Money -= price;
         }
 
         private void wallWood_Click(object sender, RoutedEventArgs e)
