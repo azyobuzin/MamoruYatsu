@@ -1,12 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Windows;
-using System.Windows.Shapes;
-using System.Windows.Media;
-
-namespace MamoruYatsu.Units
+﻿namespace MamoruYatsu.Units
 {
     class WoodWall : Wall
     {

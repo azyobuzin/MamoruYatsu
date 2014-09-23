@@ -1,13 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Windows;
-using System.Collections.ObjectModel;
-using MamoruYatsu.Units;
 using System.Windows.Controls;
 using System.Windows.Threading;
 using MamoruYatsu.Stages;
+using MamoruYatsu.Units;
 
 namespace MamoruYatsu
 {
